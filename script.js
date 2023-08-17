@@ -38,8 +38,8 @@ function createProcessedWeather(
   };
 }
 
-const getProcessedWeather = (location) =>
-  getWeatherOf(location).then((weather) => {
+const getProcessedWeather = (location) => {
+  return getWeatherOf(location).then((weather) => {
     return createProcessedWeather(
       weather.location.name,
       weather.location.country,
@@ -53,10 +53,11 @@ const getProcessedWeather = (location) =>
       weather.current.humidity
     );
   });
+};
 const form = document.querySelector("form");
 const [input, button] = form;
 const weatherDisplay = document.querySelector("div.weather-display");
-console.log(button);
+console.log(input);
 const [
   feelsLike,
   cloudInformation,
@@ -80,6 +81,7 @@ function propagateWeatherDisplay(location) {
   });
 }
 
-button.onClick = () => {
+button.onclick = () => {
+  console.log(input.value);
   propagateWeatherDisplay(input.value);
 };
