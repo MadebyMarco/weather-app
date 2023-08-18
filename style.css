@@ -40,9 +40,13 @@ h1.title {
 }
 
 form {
-  align-self: center;
-  display: flex;
+  display: grid;
   gap: 15px;
+  align-self: center;
+  align-items: center;
+
+  grid-template-columns: repeat(3, min-content);
+  grid-template-rows: min-content min-content;
 }
 
 form > button {
@@ -79,4 +83,14 @@ img {
 
 h1.heading {
   letter-spacing: 10px;
+}
+
+small {
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+  background-color: black;
+  padding-left: 4px;
+  letter-spacing: 2px;
+  grid-row: 2/3;
 }
