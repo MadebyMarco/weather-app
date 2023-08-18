@@ -1,0 +1,34 @@
+body,
+html {
+  height: 100%;
+}
+
+body {
+  display: grid;
+  grid-template-rows: 100px 100px 300px;
+  justify-items: center;
+  margin-top: 100px;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.weather-display {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: end;
+  justify-items: center;
+  column-gap: 60px;
+}
+
+.weather-display > div {
+  display: grid;
+  justify-items: center;
+}
+
+h1.title {
+  justify-self: center;
+}
+
+form {
+  align-self: center;
+}
