@@ -12,7 +12,6 @@ async function getWeatherOf(location) {
   const weather = await request.json();
   return weather;
 }
-const error = document.querySelector("small");
 
 function createProcessedWeather(
   locationName,
@@ -58,6 +57,7 @@ const getProcessedWeather = async (location) => {
 };
 const form = document.querySelector("form");
 const [input, button] = form;
+const error = document.querySelector("small");
 const weatherDisplay = document.querySelector("div.weather-display");
 const locationTitle = document.querySelector("h1.title");
 console.log(input);
@@ -71,22 +71,31 @@ const [
 ] = weatherDisplay.children;
 
 function propagateWeatherDisplay(location) {
-  getProcessedWeather(location).then((weather) => {
-    locationTitle.textContent =
-      weather.locationName + ", " + weather.locationCountry;
+  getProcessedWeather(location)
+    .then((weather) => {
+      error.textContent = "";
 
-    feelsLike.firstElementChild.textContent = weather.feelsLikeF;
+      locationTitle.textContent =
+        weather.locationName + ", " + weather.locationCountry;
 
-    cloudInformation.firstElementChild.textContent = weather.cloudConditionText;
-    cloudInformation.children[1].src = weather.cloudConditionIcon;
-    cloudInformation.children[1].style.opacity = 1;
+      feelsLike.firstElementChild.textContent = weather.feelsLikeF;
 
-    windInformation.firstElementChild.textContent = weather.windMPH;
+      cloudInformation.firstElementChild.textContent =
+        weather.cloudConditionText;
+      cloudInformation.children[1].src = weather.cloudConditionIcon;
+      cloudInformation.children[1].style.opacity = 1;
 
-    temperatureInformation.firstElementChild.textContent = weather.temperatureF;
+      windInformation.firstElementChild.textContent = weather.windMPH;
 
-    humidity.firstElementChild.textContent = weather.humidity;
-  });
+      temperatureInformation.firstElementChild.textContent =
+        weather.temperatureF;
+
+      humidity.firstElementChild.textContent = weather.humidity;
+    })
+    .catch((err) => {
+      error.textContent = "Please enter a valid location";
+      console.log(err);
+    });
 }
 
 button.onclick = () => {
