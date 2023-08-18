@@ -60,7 +60,6 @@ const [input, button] = form;
 const error = document.querySelector("small");
 const weatherDisplay = document.querySelector("div.weather-display");
 const locationTitle = document.querySelector("h1.title");
-console.log(input);
 
 const [
   feelsLike,
@@ -94,11 +93,10 @@ function propagateWeatherDisplay(location) {
     })
     .catch((err) => {
       error.textContent = "Please enter a valid location";
-      console.log(err);
+      console.error(err);
     });
 }
 
 button.onclick = () => {
-  console.log(input.value);
   propagateWeatherDisplay(input.value);
 };
