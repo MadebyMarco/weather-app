@@ -1,16 +1,18 @@
 async function getWeatherOf(location) {
-  if (typeof location !== "string") {
+  if (typeof location !== "string" || location.length < 1) {
     console.error("Please enter a valid location");
     return;
   }
-  const test = await fetch(
+  const request = await fetch(
     "https://api.weatherapi.com/v1/current.json?key=990cd69ce9904fe3992185048231408&q=" +
       location,
     { mode: "cors" }
   );
-  const weather = await test.json();
+
+  const weather = await request.json();
   return weather;
 }
+const error = document.querySelector("small");
 
 function createProcessedWeather(
   locationName,
@@ -38,8 +40,8 @@ function createProcessedWeather(
   };
 }
 
-const getProcessedWeather = (location) => {
-  return getWeatherOf(location).then((weather) => {
+const getProcessedWeather = async (location) => {
+  return await getWeatherOf(location).then((weather) => {
     return createProcessedWeather(
       weather.location.name,
       weather.location.country,
@@ -57,7 +59,9 @@ const getProcessedWeather = (location) => {
 const form = document.querySelector("form");
 const [input, button] = form;
 const weatherDisplay = document.querySelector("div.weather-display");
+const locationTitle = document.querySelector("h1.title");
 console.log(input);
+
 const [
   feelsLike,
   cloudInformation,
@@ -68,10 +72,14 @@ const [
 
 function propagateWeatherDisplay(location) {
   getProcessedWeather(location).then((weather) => {
+    locationTitle.textContent =
+      weather.locationName + ", " + weather.locationCountry;
+
     feelsLike.firstElementChild.textContent = weather.feelsLikeF;
 
     cloudInformation.firstElementChild.textContent = weather.cloudConditionText;
     cloudInformation.children[1].src = weather.cloudConditionIcon;
+    cloudInformation.children[1].style.opacity = 1;
 
     windInformation.firstElementChild.textContent = weather.windMPH;
 
