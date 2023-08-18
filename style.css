@@ -5,11 +5,12 @@ html {
 
 body {
   display: grid;
-  grid-template-rows: 100px 100px 300px;
+  grid-template-rows: 100px 100px 100px min-content;
   justify-items: center;
   margin-top: 100px;
   margin-left: 150px;
   margin-right: 150px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .weather-display {
@@ -25,10 +26,57 @@ body {
   justify-items: center;
 }
 
+.weather-display h1 {
+  letter-spacing: 5px;
+}
+
+.weather-display h2 {
+  letter-spacing: 3px;
+}
+
 h1.title {
   justify-self: center;
+  text-decoration: underline rgb(38, 0, 255);
 }
 
 form {
   align-self: center;
+  display: flex;
+  gap: 15px;
+}
+
+form > button {
+  border: rgb(38, 0, 255) 3px solid;
+  background-color: transparent;
+  color: rgb(38, 0, 255);
+  padding: 5px 10px;
+  font-size: 15px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+form > button:hover {
+  color: rgb(28, 2, 175);
+  border-color: rgb(28, 2, 175);
+  box-shadow: 3px 2px 5px 0px rgba(28, 2, 175, 0.6);
+  cursor: pointer;
+}
+
+form > button:active {
+  box-shadow: inset 0px 0px 5px 0px rgba(28, 2, 175, 0.6);
+}
+
+input {
+  outline: transparent;
+  border: transparent;
+  border-bottom: rgb(38, 0, 255) 3px solid;
+  font-size: 20px;
+}
+
+img {
+  opacity: 0;
+}
+
+h1.heading {
+  letter-spacing: 10px;
 }
